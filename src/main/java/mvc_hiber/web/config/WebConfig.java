@@ -28,7 +28,7 @@ import java.util.Properties;
 
 public class WebConfig implements WebMvcConfigurer {
 
-   @Autowired
+    @Autowired
     private Environment environment;
 
 

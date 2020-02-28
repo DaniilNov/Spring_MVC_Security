@@ -32,14 +32,13 @@ public class UserController {
     }
 
 
-
     @RequestMapping("/remove/{id}")
     public String removeUser(@PathVariable("id") int id) {
         userService.removeUser(id);
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable("id") int id) {
         User user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
@@ -56,14 +55,15 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public ModelAndView addPage(){
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addUser");
         return modelAndView;
     }
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user")User user, BindingResult result){
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView addUser(@ModelAttribute("user") User user, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/users");
         userService.addUser(user);

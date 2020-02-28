@@ -10,13 +10,13 @@ public class User {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "AGE")
-    private int age;
+    private Integer age;
 
     public int getId() {
         return id;
