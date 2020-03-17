@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -29,9 +29,9 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),
+//    inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public Long getId() {

@@ -12,7 +12,7 @@ public class RoleDaoImpl implements RoleDao {
     SessionFactory sessionFactory;
 
     @Override
-    public User getUserByName(String username) {
+    public User getUserByUsername(String username) {
         return sessionFactory.getCurrentSession().get(User.class,username);
     }
 }

@@ -15,18 +15,12 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    private RoleDao roleDao;
-
     @Override
     public void addUser(User user) {
 //        sessionFactory.getCurrentSession().save(user);
-       Session session = sessionFactory.getCurrentSession();
-       User userFromDB = roleDao.getUserByName(user.getUsername());
-     if (userFromDB==null){
-         user.setRoles(Collections.singleton(new Role(1L,"ROLE_USER")));
-         session.save(user);
-     }
+        Session session = this.sessionFactory.getCurrentSession();
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        session.save(user);
     }
 
     @Override

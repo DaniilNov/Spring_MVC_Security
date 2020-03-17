@@ -14,7 +14,7 @@
         <caption><h2>Users</h2></caption>
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th>Username</th>
             <th>Age</th>
             <th>Action</th>
 
