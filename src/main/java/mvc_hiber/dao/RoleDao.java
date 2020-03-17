@@ -4,5 +4,5 @@ import mvc_hiber.model.User;
 
 public interface RoleDao {
     User getUserByName(String username);
-    
+
 }
