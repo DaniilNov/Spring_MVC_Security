@@ -21,7 +21,7 @@
             <c:forEach items="${listUsers}" var="user">
         <tr>
             <td>${user.id}</td>
-            <td>${user.name}</td>
+            <td>${user.username}</td>
             <td>${user.age}</td>
             <td>
                 <a href="/edit/${user.id}">Edit</a>

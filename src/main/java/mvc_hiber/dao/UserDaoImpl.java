@@ -1,12 +1,13 @@
 package mvc_hiber.dao;
 
+import mvc_hiber.model.Role;
 import mvc_hiber.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -14,10 +15,18 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public void addUser(User user) {
-        sessionFactory.getCurrentSession().save(user);
+//        sessionFactory.getCurrentSession().save(user);
+       Session session = sessionFactory.getCurrentSession();
+       User userFromDB = roleDao.getUserByName(user.getUsername());
+     if (userFromDB==null){
+         user.setRoles(Collections.singleton(new Role(1L,"ROLE_USER")));
+         session.save(user);
+     }
     }
 
     @Override
@@ -26,7 +35,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUser(int id) {
+    public void removeUser(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
         User user = (User) session.get(User.class, id);
         if (user != null) {
@@ -35,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Long id) {
 
         Session session = this.sessionFactory.getCurrentSession();
         User user = (User) session.get(User.class, id);

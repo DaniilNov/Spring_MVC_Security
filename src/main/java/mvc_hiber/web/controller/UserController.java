@@ -33,13 +33,13 @@ public class UserController {
 
 
     @RequestMapping("/remove/{id}")
-    public String removeUser(@PathVariable("id") int id) {
+    public String removeUser(@PathVariable("id") Long id) {
         userService.removeUser(id);
         return "redirect:/users";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editPage(@PathVariable("id") int id) {
+    public ModelAndView editPage(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editUser");
