@@ -17,14 +17,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "AGE")
-    private Integer age;
+
 
     @Column(name = "USERNAME")
     private String username;
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "AGE")
+    private Integer age;
 
     @Transient
     private String confirmPassword;

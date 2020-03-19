@@ -9,12 +9,16 @@
 <c:url value="/add" var="var"/>
 <form action="${var}" method="POST">
     <input type="hidden" name="id" value="${user.id}">
+
     <label for="username">Username</label>
     <input type="text" name="username" id="username">
+
     <label for="password">Password</label>
     <input type="password" name="password" id="password">
+
     <label for="age">Age</label>
     <input type="text" name="age" id="age">
+
     <input type="submit" value="Add user">
 </form>
 </body>
