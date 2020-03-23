@@ -15,14 +15,18 @@
         <tr>
             <th>Id</th>
             <th>Username</th>
+            <%--<th>Role</th>--%>
             <th>Age</th>
+            <th>Password</th>
             <th>Action</th>
 
             <c:forEach items="${listUsers}" var="user">
         <tr>
             <td>${user.id}</td>
             <td>${user.username}</td>
+            <%--<td>${user.roles}</td>--%>
             <td>${user.age}</td>
+            <td>${user.password}</td>
             <td>
                 <a href="/edit/${user.id}">Edit</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;

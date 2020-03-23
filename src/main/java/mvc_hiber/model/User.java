@@ -52,11 +52,8 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public String getName() {
-        return username;
-    }
 
-    public void setName(String name) {
+    public void setUsername(String name) {
         this.username = name;
     }
 

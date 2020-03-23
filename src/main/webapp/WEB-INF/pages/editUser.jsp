@@ -9,10 +9,16 @@
 <c:url value="/edit" var="var"/>
 <form action="${var}" method="POST">
     <input type="hidden" name="id" value="${user.id}">
+
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="${user.username}">
+
+    <label for="password">Password</label>
+    <input type="text" name="password" id="password" value="${user.password}">
+
     <label for="age">Age</label>
     <input type="text" name="age" id="age" value="${user.age}">
+
     <input type="submit" value="Edit user">
 </form>
 </body>
