@@ -4,5 +4,8 @@
 <html>
 <body>
 <h1>${mess}</h1>
+<form action="/logout"  method="post">
+    <input type="submit" value="Выйти"/>
+</form>
 </body>
 </html>

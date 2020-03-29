@@ -21,5 +21,8 @@
 
     <input type="submit" value="Edit user">
 </form>
+<form action="/logout"  method="post">
+    <input type="submit" value="Выйти"/>
+</form>
 </body>
 </html>

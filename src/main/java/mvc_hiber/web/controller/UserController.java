@@ -70,6 +70,11 @@ public class UserController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
+    }
+
 //    @RequestMapping("/edit/{id}")
 //    public String editUser(@PathVariable("id") int id, Model model ){
 //

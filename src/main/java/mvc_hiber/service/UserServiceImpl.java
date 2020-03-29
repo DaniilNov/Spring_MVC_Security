@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService,UserDetailsService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao userDao;

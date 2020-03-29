@@ -1,10 +1,13 @@
 package mvc_hiber.service;
 
 import mvc_hiber.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     void addUser(User user);
 
     void updateUser(User user);
@@ -15,5 +18,6 @@ public interface UserService {
 
     List<User> listUsers();
 
-
+    @Override
+    UserDetails loadUserByUsername(String s) throws UsernameNotFoundException;
 }
