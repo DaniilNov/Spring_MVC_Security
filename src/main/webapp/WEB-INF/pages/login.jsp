@@ -15,6 +15,7 @@
     <%--<input name="j_username"/>--%>
     <%--<input name="j_password"/>--%>
     <%--<input type="submit"/>--%>
+
 </form>
 
 <%--<h2>Регистрация</h2>--%>
