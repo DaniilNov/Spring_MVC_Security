@@ -1,15 +1,6 @@
-package mvc_hiber.web.config;
+package mvc_hiber.config;
 
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.DelegatingFilterProxy;
-import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.*;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 

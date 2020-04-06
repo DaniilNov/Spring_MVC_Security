@@ -1,4 +1,4 @@
-package mvc_hiber.web.controller;
+package mvc_hiber.controller;
 
 
 import mvc_hiber.model.User;

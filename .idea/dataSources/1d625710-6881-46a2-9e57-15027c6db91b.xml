@@ -939,11 +939,11 @@
     <table id="238" parent="7" name="role">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="239" parent="7" name="users">
-      <Engine>InnoDB</Engine>
-    </table>
-    <table id="240" parent="7" name="users_role">
+    <table id="239" parent="7" name="user_roles">
       <Engine>MyISAM</Engine>
+    </table>
+    <table id="240" parent="7" name="users">
+      <Engine>InnoDB</Engine>
     </table>
     <column id="241" parent="238" name="id">
       <Position>1</Position>
@@ -963,55 +963,55 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="244" parent="239" name="id">
+    <column id="244" parent="239" name="user_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="245" parent="239" name="role_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="246" parent="239" name="FKrhfovtciq1l558cw6udg0h0d3">
+      <ColNames>role_id</ColNames>
+    </index>
+    <key id="247" parent="239" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>user_id
+role_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="248" parent="240" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="239" name="username">
+    <column id="249" parent="240" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="239" name="password">
+    <column id="250" parent="240" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="239" name="age">
+    <column id="251" parent="240" name="age">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="248" parent="239" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="249" parent="240" name="users_ID">
-      <Position>1</Position>
-      <DataType>bigint(20)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="250" parent="240" name="roles_ID">
-      <Position>2</Position>
-      <DataType>bigint(20)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="251" parent="240" name="FK4educhg8rkuouedq83uj6g7gs">
-      <ColNames>roles_ID</ColNames>
-    </index>
     <key id="252" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>users_ID
-roles_ID</ColNames>
+      <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>

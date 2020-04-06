@@ -1,4 +1,4 @@
-package mvc_hiber.web.config.handler;
+package mvc_hiber.config.handler;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

@@ -1,10 +1,9 @@
-package mvc_hiber.web.config;
+package mvc_hiber.config;
 
 
 import mvc_hiber.filter.EncodingFilter;
 import mvc_hiber.service.UserService;
-import mvc_hiber.service.UserServiceImpl;
-import mvc_hiber.web.config.handler.LoginSuccessHandler;
+import mvc_hiber.config.handler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
