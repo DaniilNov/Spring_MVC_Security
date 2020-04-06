@@ -28,7 +28,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+//        Set<Role> roles = new HashSet<>();
+//        Role role = (Role) user.getRoles();
+//        roles.add(role);
+//        user.setRoles(roles);
         sessionFactory.getCurrentSession().update(user);
+//        Session session = sessionFactory.getCurrentSession();
+//        User user1 = session.load(User.class,user.getId());
+//        user1.setUsername(user.getUsername());
+//        user1.setPassword(user.getPassword());
+//        user1.setAge(user.getAge());
+//        user1.setRoles(user.getRoles());
+//        session.update(user1);
     }
 
     @Override

@@ -1,7 +1,8 @@
 <%@ page import="java.util.Locale" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page isELIgnored="false" %>
 <html>
 <head>
@@ -15,7 +16,7 @@
         <tr>
             <th>Id</th>
             <th>Username</th>
-            <%--<th>Role</th>--%>
+            <th>Role</th>
             <th>Age</th>
             <th>Password</th>
             <th>Action</th>
@@ -24,20 +25,20 @@
         <tr>
             <td>${user.id}</td>
             <td>${user.username}</td>
-            <%--<td>${user.roles}</td>--%>
+            <td> <c:forEach items="${user.roles}" var="role">${role.name}; </c:forEach></td>
             <td>${user.age}</td>
             <td>${user.password}</td>
             <td>
-                <a href="/edit/${user.id}">Edit</a>
+                <a href="/users/edit/${user.id}">Edit</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/remove/${user.id}">Delete</a>
+                <a href="/users/remove/${user.id}">Delete</a>
             </td>
         </tr>
         </c:forEach>
         </tr>
     </table>
     <h2>Add</h2>
-    <c:url value="/add" var="add"/>
+    <c:url value="/users/add" var="add"/>
     <a href="${add}">Add new user</a>
 </body>
 </html>

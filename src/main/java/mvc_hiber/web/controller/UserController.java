@@ -32,13 +32,13 @@ public class UserController {
     }
 
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/users/remove/{id}")
     public String removeUser(@PathVariable("id") Long id) {
         userService.removeUser(id);
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
@@ -47,7 +47,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/edit", method = RequestMethod.POST)
     public ModelAndView editUser(@ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/users");
@@ -55,14 +55,14 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/add", method = RequestMethod.GET)
     public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addUser");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("user") User user, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/users");
@@ -70,10 +70,29 @@ public class UserController {
         return modelAndView;
     }
 
+    //    @RequestMapping(value = "login", method = RequestMethod.GET)
+//    public String loginPage() {
+//        return "login";
+//    }
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
+
+//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+//    public ModelAndView registrationPage() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("registration");
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//    public ModelAndView registrationUser(@ModelAttribute("user") User user, BindingResult result) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("redirect:/hello");
+//        userService.addUser(user);
+//        return modelAndView;
+//    }
 
 //    @RequestMapping("/edit/{id}")
 //    public String editUser(@PathVariable("id") int id, Model model ){

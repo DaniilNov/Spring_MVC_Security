@@ -1,6 +1,7 @@
 package mvc_hiber.web.config;
 
 
+import mvc_hiber.filter.EncodingFilter;
 import mvc_hiber.service.UserService;
 import mvc_hiber.service.UserServiceImpl;
 import mvc_hiber.web.config.handler.LoginSuccessHandler;
@@ -14,14 +15,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-@Autowired
-private UserService userService;
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -32,6 +35,13 @@ private UserService userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //Добавил для кодировки
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+        EncodingFilter filter = new EncodingFilter();
+        http.addFilterBefore(filter,CsrfFilter.class);
+
         http.formLogin()
                 // указываем страницу с формой логина
                 .loginPage("/login")
@@ -58,10 +68,12 @@ private UserService userService;
         http
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
+//                //Добавил сам(Доступ только для не зарегистрированных пользователей)
+//                .antMatchers("/registration").not().fullyAuthenticated()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers("/users/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated();
     }
 
     @Bean
