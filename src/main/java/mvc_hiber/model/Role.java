@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role implements GrantedAuthority{
+public class Role implements GrantedAuthority {
 
     @Id
     @Column(name = "ID")
@@ -18,7 +18,7 @@ public class Role implements GrantedAuthority{
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private Set<User> users;
 
     public Role() {

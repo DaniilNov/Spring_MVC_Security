@@ -1,4 +1,4 @@
-package mvc_hiber.config;
+package mvc_hiber.security;
 
 
 import mvc_hiber.filter.EncodingFilter;
