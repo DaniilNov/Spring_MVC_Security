@@ -19,29 +19,31 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private RoleDao roleDao;
+//    @Autowired
+//    private RoleDao roleDao;
 
 
     @Override
     public void addUser(User user) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getRoleById(1L));
-        user.setRoles(roles);
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(roleDao.getRoleById(1L));
+//        user.setRoles(roles);
+        user.setRoles(Collections.singleton(new Role(1L)));
         userDao.addUser(user);
     }
 
 
     @Override
     public void updateUser(User user) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getRoleById(1L));
-        user.setRoles(roles);
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(roleDao.getRoleById(1L));
+//        user.setRoles(roles);
+        user.setRoles(Collections.singleton(new Role(1L)));
         userDao.updateUser(user);
     }
 
@@ -62,14 +64,7 @@ public class UserServiceImpl implements UserService{
         return userDao.listUsers();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = roleDao.getUserByUsername(username);
-        if (user==null){
-            throw new UsernameNotFoundException("User is not found");
-        }
-        return user;
-    }
+
 }
 
 

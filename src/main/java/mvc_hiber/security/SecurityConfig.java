@@ -2,8 +2,8 @@ package mvc_hiber.security;
 
 
 import mvc_hiber.filter.EncodingFilter;
+import mvc_hiber.service.SecurityService;
 import mvc_hiber.service.UserService;
-import mvc_hiber.config.handler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -22,13 +22,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private SecurityService securityService;
 
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-        auth.userDetailsService(userService);
+        auth.userDetailsService(securityService);
     }
 
     @Override
@@ -38,7 +38,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        filter.setEncoding("UTF-8");
 //        filter.setForceEncoding(true);
         EncodingFilter filter = new EncodingFilter();
-        http.addFilterBefore(filter,CsrfFilter.class);
+        http.addFilterBefore(filter, CsrfFilter.class);
+
+        http
+                //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
+                .csrf().disable()
+                // делаем страницу регистрации недоступной для авторизированных пользователей
+                .authorizeRequests()
+                //страницы аутентификаци доступна всем
+                .antMatchers("/login").anonymous()
+//                .antMatchers("/login").not().fullyAuthenticated()
+                // защищенные URL
+                .antMatchers("/users/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated();
 
         http.formLogin()
                 // указываем страницу с формой логина
@@ -59,19 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout")
-                //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
-                .and().csrf().disable();
+                .logoutSuccessUrl("/login?logout");
 
-        http
-                // делаем страницу регистрации недоступной для авторизированных пользователей
-                .authorizeRequests()
-//                //Добавил сам(Доступ только для не зарегистрированных пользователей)
-//                .antMatchers("/registration").not().fullyAuthenticated()
-                //страницы аутентификаци доступна всем
-                .antMatchers("/login").anonymous()
-                // защищенные URL
-                .antMatchers("/users/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated();
+
     }
 
     @Bean

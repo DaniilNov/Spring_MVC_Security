@@ -1,4 +1,4 @@
-package mvc_hiber.config.handler;
+package mvc_hiber.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,7 +20,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException, ServletException {
 //        httpServletResponse.sendRedirect("/hello");
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        if (roles.contains("ROLE_ADMIN")){httpServletResponse.sendRedirect("/users");}
-        else {httpServletResponse.sendRedirect("/hello");}
+        if (roles.contains("ROLE_ADMIN")) {
+            httpServletResponse.sendRedirect("/users");
+        } else {
+            httpServletResponse.sendRedirect("/hello");
+        }
     }
 }
