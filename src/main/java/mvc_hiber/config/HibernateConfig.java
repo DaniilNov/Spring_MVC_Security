@@ -10,6 +10,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -37,24 +40,50 @@ public class HibernateConfig {
     }
 
     @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(getDataSource());
+        entityManagerFactoryBean.setPackagesToScan(environment.getProperty("hibernate.entity.package"));
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
+        return entityManagerFactoryBean;
 
-        Properties props = new Properties();
-        props.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+    }
 
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setPackagesToScan(new String[]{"mvc_hiber"});
-        return factoryBean;
+    
+
+    private Properties getHibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        return properties;
     }
 
     @Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
+    JpaTransactionManager transactionManager(){
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
         return transactionManager;
     }
 
+
+//    @Bean
+//    public HibernateTransactionManager getTransactionManager() {
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(getSessionFactory().getObject());
+//        return transactionManager;
+//    }
+//    @Bean
+//    public LocalSessionFactoryBean getSessionFactory() {
+//        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+//        factoryBean.setDataSource(getDataSource());
+//
+//        Properties props = new Properties();
+//        props.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+//        props.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+//
+//        factoryBean.setHibernateProperties(props);
+//        factoryBean.setPackagesToScan(new String[]{"mvc_hiber"});
+//        return factoryBean;
+//    }
 }

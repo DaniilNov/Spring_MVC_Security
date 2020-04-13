@@ -8,19 +8,24 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
-    @Autowired
-    SessionFactory sessionFactory;
+    //    @Autowired
+//    SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public User getUserByUsername(String username) {
         User user = null;
-       Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM User WHERE username =:username");
+//       Session session = sessionFactory.getCurrentSession();
+//        Query query = session.createQuery("FROM User WHERE username =:username");
+        Query query = (Query) entityManager.createQuery("FROM User WHERE username =:username");
         query.setParameter("username", username);
         user = (User) query.uniqueResult();
         return user;
@@ -28,7 +33,8 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleById(Long id) {
-        return sessionFactory.getCurrentSession().get(Role.class,id);
+//        return sessionFactory.getCurrentSession().get(Role.class,id);
+        return entityManager.find(Role.class, id);
     }
 
 //    public Role getRoleByUserId(Long id){
